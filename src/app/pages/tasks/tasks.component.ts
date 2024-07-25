@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, NgModule, ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { DxDataGridModule, DxFormModule, DxLoadIndicatorModule, DxPopoverModule, DxTooltipModule } from 'devextreme-angular';
 import 'devextreme/data/odata/store';
+import { PopoverComponentModule } from '../../shared/components/popover/popover.component';
+import { MESSAGES } from '../../shared/constants/message';
 
 @Component({
   templateUrl: 'tasks.component.html'
@@ -8,6 +13,55 @@ import 'devextreme/data/odata/store';
 export class TasksComponent {
   dataSource: any;
   priority: any[];
+  popoverVisible = false;
+  targetElement: any;
+  id = '';
+  animation: object = {
+    show: { type: 'pop', from: { scale: 0 }, to: { scale: 1 }, duration: 300 },
+    hide: { type: 'fade', from: 1, to: 0, duration: 300, delay: 1000 } // delay in milliseconds
+  };
+
+ 
+ 
+
+  onCellPrepared(e: any) {
+    if (e.rowType === 'header' && e.column) {
+      const column = e.column;
+      e.cellElement.addEventListener('mouseenter', () => {
+        this.showPopover(e.cellElement, column.caption || column.dataField);
+      });
+      e.cellElement.addEventListener('mouseleave', () => {
+        this.hidePopover();
+      });
+    }
+  }
+
+  getHeaderTemplate(columnName: string) {
+    switch (columnName) {
+      case 'status':
+        return 'status';  // Reference to the `status` ng-template
+      case 'priority':
+        return 'priority';  // Reference to the `priority` ng-template
+      default:
+        return null;
+    }
+  }
+
+
+  showPopover(targetElement: any, id: string) {
+    this.id = id;
+    this.targetElement = targetElement;
+    this.popoverVisible = true;
+    if (MESSAGES[this.id as keyof typeof MESSAGES]) {
+      this.popoverVisible = true;
+    } else {
+      this.popoverVisible = false;
+    }
+  }
+
+  hidePopover() {
+    this.popoverVisible = false;
+  }
 
   constructor() {
     this.dataSource = {
@@ -37,3 +91,20 @@ export class TasksComponent {
     ];
   }
 }
+
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule,
+    DxFormModule,
+    DxLoadIndicatorModule,
+    DxPopoverModule,
+    DxDataGridModule,
+    PopoverComponentModule
+
+  ],
+  declarations: [ TasksComponent ],
+  exports: [ TasksComponent ]
+})
+export class TasksModule { }

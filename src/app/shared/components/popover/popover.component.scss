@@ -1,0 +1,16 @@
+.popover-content {
+    pointer-events: auto;
+}
+
+.popover-content a {
+    color: blue;
+    text-decoration: underline;
+}
+
+::ng-deep .dx-popover {
+    z-index: 1000;
+    position: absolute;
+
+}
+
+/* You can add global styles to this file, and also import other style files */

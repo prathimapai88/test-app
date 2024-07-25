@@ -55,8 +55,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     HomeComponent,
-    ProfileComponent,
-    TasksComponent
+    ProfileComponent
   ]
 })
 export class AppRoutingModule { }

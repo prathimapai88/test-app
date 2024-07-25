@@ -1,4 +1,9 @@
-<h2 class="content-block">Tasks</h2>
+<app-popover 
+  [visible]="popoverVisible" 
+  [targetElement]="targetElement" 
+  [content]="id">
+</app-popover>
+
 
 <dx-data-grid class="dx-card wide-card"
   [dataSource]="dataSource"
@@ -6,6 +11,7 @@
   [focusedRowEnabled]="true"
   [focusedRowIndex]="0"
   [columnAutoWidth]="true"
+  (onCellPrepared)="onCellPrepared($event)"
   [columnHidingEnabled]="true">
 
   <dxo-paging [pageSize]="10"></dxo-paging>
@@ -26,11 +32,14 @@
   <dxi-column
     dataField="Task_Status"
     caption="Status"
+    headerCellTemplate="status"
+    [headerCellTemplate]="getHeaderTemplate('Status')"
     [hidingPriority]="6">
   </dxi-column>
   <dxi-column
     dataField="Task_Priority"
     caption="Priority"
+    [headerCellTemplate]="getHeaderTemplate('Priority')"
     [hidingPriority]="5">
     <dxo-lookup
       [dataSource]="priority"
@@ -67,4 +76,13 @@
     caption="Completion"
     [hidingPriority]="0">
   </dxi-column>
+
+  <div *dxTemplate="let info of 'Status'">
+    <i style="color: black">status</i>
+  </div>
+
+  <div *dxTemplate="let info of 'Priority'">
+    <i style="color: black">Priority</i>
+  </div>
 </dx-data-grid>
+
