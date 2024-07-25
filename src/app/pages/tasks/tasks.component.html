@@ -32,14 +32,13 @@
   <dxi-column
     dataField="Task_Status"
     caption="Status"
-    headerCellTemplate="status"
-    [headerCellTemplate]="getHeaderTemplate('Status')"
+    headerCellTemplate="Status"
     [hidingPriority]="6">
   </dxi-column>
   <dxi-column
     dataField="Task_Priority"
     caption="Priority"
-    [headerCellTemplate]="getHeaderTemplate('Priority')"
+    headerCellTemplate="Priority"
     [hidingPriority]="5">
     <dxo-lookup
       [dataSource]="priority"
@@ -78,11 +77,11 @@
   </dxi-column>
 
   <div *dxTemplate="let info of 'Status'">
-    <i style="color: black">status</i>
+    <i style="color: black">Status ii</i> 
   </div>
 
   <div *dxTemplate="let info of 'Priority'">
-    <i style="color: black">Priority</i>
+    <i style="color: black">Priority ii</i>
   </div>
 </dx-data-grid>
 

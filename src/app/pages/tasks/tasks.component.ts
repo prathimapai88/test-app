@@ -36,18 +36,7 @@ export class TasksComponent {
     }
   }
 
-  getHeaderTemplate(columnName: string) {
-    switch (columnName) {
-      case 'status':
-        return 'status';  // Reference to the `status` ng-template
-      case 'priority':
-        return 'priority';  // Reference to the `priority` ng-template
-      default:
-        return null;
-    }
-  }
-
-
+  
   showPopover(targetElement: any, id: string) {
     this.id = id;
     this.targetElement = targetElement;
