@@ -17,7 +17,7 @@ import { MESSAGES } from '../../constants/message';
     >
       <div class="popover-content">
         {{ message }}
-        <a href="https://www.example.com" target="_blank" rel="noopener noreferrer">Visit Example.com</a>
+        <a *ngIf="url" [href]="url" target="_blank" rel="noopener noreferrer">Learn more</a>
       </div>
     </dx-popover>
   `,
@@ -46,10 +46,12 @@ export class PopoverComponent {
     hide: { type: 'fade', from: 1, to: 0, duration: 300, delay: 1000 }, // delay in milliseconds
   };
 
-  get message(): string | void {
-    if (MESSAGES[this.content as keyof typeof MESSAGES]) {
-      return MESSAGES[this.content as keyof typeof MESSAGES];
-    }
+  get message(): string {
+    return MESSAGES[this.content as keyof typeof MESSAGES]?.message || '';
+  }
+
+  get url(): string {
+    return MESSAGES[this.content as keyof typeof MESSAGES]?.url || '';
   }
 }
 
