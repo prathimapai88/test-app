@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, NgModule, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DxDataGridModule, DxFormModule, DxLoadIndicatorModule, DxPopoverModule, DxTooltipModule } from 'devextreme-angular';
+import { DxBulletModule, DxButtonModule, DxDataGridModule, DxFormModule, DxLoadIndicatorModule, DxPopoverModule, DxTextBoxModule, DxTooltipModule } from 'devextreme-angular';
 import 'devextreme/data/odata/store';
 import { PopoverComponentModule } from '../../shared/components/popover/popover.component';
 import { MESSAGES } from '../../shared/constants/message';
+import { PopOverDirective } from '../../popover.directive';
 
 @Component({
   templateUrl: 'tasks.component.html'
@@ -90,10 +91,13 @@ export class TasksComponent {
     DxLoadIndicatorModule,
     DxPopoverModule,
     DxDataGridModule,
-    PopoverComponentModule
+    PopoverComponentModule,
+    DxBulletModule,
+    DxButtonModule,
+    DxTextBoxModule
 
   ],
-  declarations: [ TasksComponent ],
+  declarations: [ TasksComponent ,PopOverDirective ],
   exports: [ TasksComponent ]
 })
 export class TasksModule { }

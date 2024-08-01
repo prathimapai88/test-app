@@ -16,8 +16,8 @@ import { MESSAGES } from '../../constants/message';
       [closeOnOutsideClick]="true"
     >
       <div class="popover-content">
-        {{ message }}
-        <a *ngIf="url" [href]="url" target="_blank" rel="noopener noreferrer">Learn more</a>
+        {{ popoverData.message }}
+        <a *ngIf="popoverData.url" [href]="popoverData.url" target="_blank" rel="noopener noreferrer">Learn more</a>
       </div>
     </dx-popover>
   `,
@@ -42,16 +42,12 @@ export class PopoverComponent {
   @Input() content: string = '';
 
   animation: object = {
-    show: { type: 'pop', from: { scale: 0 }, to: { scale: 1 }, duration: 300 },
+    show: { type: 'pop', from: { scale: 0 }, to: { scale: 1 }, duration: 500 },
     hide: { type: 'fade', from: 1, to: 0, duration: 300, delay: 1000 }, // delay in milliseconds
   };
 
-  get message(): string {
-    return MESSAGES[this.content as keyof typeof MESSAGES]?.message || '';
-  }
-
-  get url(): string {
-    return MESSAGES[this.content as keyof typeof MESSAGES]?.url || '';
+  get popoverData(): { message: string, url?: string } {
+    return MESSAGES[this.content as keyof typeof MESSAGES] || { message: '', url: '' };
   }
 }
 

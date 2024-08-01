@@ -18,8 +18,10 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent],
   imports: [
     BrowserModule,
     SideNavOuterToolbarModule,
