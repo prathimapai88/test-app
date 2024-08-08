@@ -7,6 +7,7 @@ import { PopoverComponent } from './shared/components/popover/popover.component'
 })
 export class PopOverDirective implements AfterViewInit {
   @Input('appPopoverId') id: string = '';
+  @Input('showIcon') ishowIcond: boolean = false;
   private popoverInstance: any;
 
   constructor(
@@ -17,13 +18,18 @@ export class PopOverDirective implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
+    
     const span = this.renderer.createElement('span');
     const icon = this.renderer.createElement('i');
+    if(this.ishowIcond){
     this.renderer.addClass(icon, 'icon');
-    this.renderer.addClass(icon, 'dx-icon-info'); 
+    this.renderer.addClass(icon, 'dx-icon-info');
     this.renderer.appendChild(span, icon);
+    }
     this.renderer.appendChild(this.el.nativeElement, span);
     this.createPopoverComponent(span);
+   
+    
   }
 
   private createPopoverComponent(targetElement: any) {
