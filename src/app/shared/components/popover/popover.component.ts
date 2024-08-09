@@ -43,7 +43,7 @@ export class PopoverComponent {
 
   animation: object = {
     show: { type: 'pop', from: { scale: 0 }, to: { scale: 1 }, duration: 500 },
-    hide: { type: 'fade', from: 1, to: 0, duration: 300, delay: 1000 }, // delay in milliseconds
+    hide: { type: 'fade', from: 1, to: 0, duration: 300, delay: 800 }, // delay in milliseconds
   };
 
   get popoverData(): { message: string, url?: string } {
