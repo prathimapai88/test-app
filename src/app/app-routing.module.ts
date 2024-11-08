@@ -6,11 +6,12 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import { ReferenceComponent } from './pages/reference-table/reference-table.component';
 
 const routes: Routes = [
   {
     path: 'tasks',
-    component: TasksComponent,
+    component: ReferenceComponent,
     canActivate: [ AuthGuardService ]
   },
   {
