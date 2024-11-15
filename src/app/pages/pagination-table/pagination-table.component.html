@@ -1,28 +1,37 @@
-<div>
-  <!-- Search Box -->
-  <input
-    type="text"
-    placeholder="Search..."
-    (input)="onSearch($event)"
-     />
+<dx-data-grid
+  id="gridContainer"
+  [dataSource]="dataSource"
+  [remoteOperations]="true"
+  [wordWrapEnabled]="true"
+  [showBorders]="true"
+>
+  <dxo-scrolling mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+  <dxo-paging [pageSize]="20"></dxo-paging>
+  <dxo-header-filter [visible]="true">
+    <dxo-search [enabled]="true"></dxo-search>
+  </dxo-header-filter>
 
-  <!-- DataGrid Component -->
-  <dx-data-grid
-    [dataSource]="dataSource"
-    [remoteOperations]="{ paging: true, filtering: true }"
-    [paging]="{ pageSize: 10 }"
-    [showBorders]="true">
-    
-    <dxo-paging [enabled]="true" [pageSize]="10"></dxo-paging>
-    <dxo-pager
-      [showPageSizeSelector]="true"
-      [allowedPageSizes]="[10, 20, 50]"
-      [showInfo]="true">
-    </dxo-pager>
-
-    <!-- Columns with specific widths -->
-    <dxi-column dataField="id" caption="ID" [width]="50"></dxi-column>
-    <dxi-column dataField="title" caption="Title" [width]="200"></dxi-column>
-    <dxi-column dataField="body" caption="Body" [width]="400"></dxi-column>
-  </dx-data-grid>
-</div>
+  <dxi-column dataField="Id" width="90"></dxi-column>
+  <dxi-column dataField="StoreName" caption="Store" width="150"></dxi-column>
+  <dxi-column
+    dataField="ProductCategoryName"
+    caption="Category"
+    width="120"
+  ></dxi-column>
+  <dxi-column dataField="ProductName" caption="Product"></dxi-column>
+  <dxi-column
+    dataField="DateKey"
+    caption="Date"
+    dataType="date"
+    format="yyyy-MM-dd"
+    width="110"
+  ></dxi-column>
+  <dxi-column
+    dataField="SalesAmount"
+    caption="Amount"
+    format="currency"
+    width="100"
+  >
+    <dxo-header-filter [groupInterval]="1000"></dxo-header-filter>
+  </dxi-column>
+</dx-data-grid>

@@ -7,12 +7,12 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { ReferenceComponent } from './pages/reference-table/reference-table.component';
-import { paginationComponent } from './pages/pagination-table/pagination-table.component';
+import { PaginationComponent } from './pages/pagination-table/pagination-table.component';
 
 const routes: Routes = [
   {
     path: 'tasks',
-    component: paginationComponent,
+    component: PaginationComponent,
     canActivate: [ AuthGuardService ]
   },
   {
