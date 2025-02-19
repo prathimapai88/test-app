@@ -1,18 +1,13 @@
 <dx-data-grid
   [dataSource]="dataSource"
   [showBorders]="true"
-  [editing]="{
-    mode: 'cell',    
-    allowUpdating: true,
-    allowAdding: true,
-    allowDeleting: true
-  }">
-  <dxi-column dataField="name" caption="Name"></dxi-column>
-  <dxi-column dataField="status" caption="Status">
-    <dxo-lookup
-      [dataSource]="statusOptions"
-      valueExpr="value"
-      displayExpr="text">
-    </dxo-lookup>
-  </dxi-column>
+  [columnAutoWidth]="true"
+  [allowColumnResizing]="true"
+  [allowColumnReordering]="true"
+  [editing]="{ mode: 'cell', allowUpdating: true }">
+
+  <dxi-column dataField="startDate" caption="Start Date" dataType="date"></dxi-column>
+  <dxi-column dataField="endDate" caption="End Date" dataType="date"></dxi-column>
+  <dxi-column dataField="capacity" caption="Capacity" dataType="number"></dxi-column>
+
 </dx-data-grid>

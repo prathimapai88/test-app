@@ -18,6 +18,8 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DxChartModule } from 'devextreme-angular';
+import { DxoLookupModule } from 'devextreme-angular/ui/nested';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DxChartModule,
+    DxoLookupModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent],

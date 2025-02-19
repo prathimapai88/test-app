@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, NgModule, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DxBulletModule, DxButtonModule, DxDataGridModule, DxFormModule, DxLoadIndicatorModule, DxPopoverModule, DxTextBoxModule, DxTooltipModule } from 'devextreme-angular';
+import { DxBulletModule, DxButtonModule, DxDataGridModule, DxDateBoxModule, DxFormModule, DxLoadIndicatorModule, DxNumberBoxModule, DxPopoverModule, DxTextBoxModule, DxTooltipModule } from 'devextreme-angular';
 import 'devextreme/data/odata/store';
 import { PopoverComponentModule } from '../../shared/components/popover/popover.component';
 
@@ -12,32 +12,10 @@ import { PopoverComponentModule } from '../../shared/components/popover/popover.
 
 export class ReferenceComponent {
   dataSource = [
-    { name: 'John Doe', status: true },
-    { name: 'Jane Smith', status: false },
-    { name: 'Alice Johnson', status: true }
+    { startDate: new Date(2024, 1, 1), endDate: new Date(2024, 1, 10), capacity: 50 },
+    { startDate: new Date(2024, 2, 5), endDate: new Date(2024, 2, 15), capacity: 75 },
+    { startDate: new Date(2024, 3, 10), endDate: new Date(2024, 3, 20), capacity: 100 }
   ];
-
-  statusOptions = [
-    { value: true, text: 'true' },
-    { value: false, text: 'false' }
-  ];
-
-  onRowUpdated(e: any) {
-    console.log('Row updated:', e);
-    // Handle the row update, e.g., send the updated data to a backend
-  }
-
-  onRowInserted(e: any) {
-    console.log('Row inserted:', e);
-    // Handle the new row insertion, e.g., add it to a backend
-  }
-
-  onRowRemoved(e: any) {
-    console.log('Row removed:', e);
-    // Handle row removal, e.g., remove it from a backend
-  }
-
-
 
   constructor() {
    
@@ -47,13 +25,9 @@ export class ReferenceComponent {
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
-    DxFormModule,
-    DxLoadIndicatorModule,
-    DxPopoverModule,
     DxDataGridModule,
-    PopoverComponentModule,
+    DxDateBoxModule,
+    DxNumberBoxModule
 
   ],
   declarations: [ ReferenceComponent  ],
