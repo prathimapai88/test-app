@@ -1,54 +1,36 @@
-import { Component } from '@angular/core';
-import CustomStore from 'devextreme/data/custom_store';
-import DataSource from 'devextreme/data/data_source';
+convertFilterToArray(filter: any): { attributename: string; atttributeVal: any[] }[] {
+  const result: { attributename: string; atttributeVal: any[] }[] = [];
 
-@Component({
-  selector: 'app-data-grid',
-  templateUrl: './data-grid.component.html',
-  styleUrls: ['./data-grid.component.css']
-})
-export class DataGridComponent {
-  dataSource: DataSource;
+  if (!filter) return result;
 
-  constructor() {
-    this.dataSource = new DataSource({
-      store: new CustomStore({
-        load: (loadOptions: any) => {
-          let filters = this.customizeFilter(loadOptions.filter);
-          console.log('Modified Filters:', filters);
-          
-          return fetch('https://your-api-endpoint', {
-            method: 'POST',
-            body: JSON.stringify({ filter: filters }),
-            headers: { 'Content-Type': 'application/json' }
-          })
-            .then(response => response.json())
-            .catch(() => []);
+  function processFilter(condition: any) {
+    if (Array.isArray(condition) && typeof condition[0] === 'string') {
+      // Simple condition ["column1", "=", value]
+      let attributeName = condition[0];
+      let operator = condition[1];
+      let value = condition[2];
+
+      if (operator === "=" || operator === "in") {
+        let existing = result.find(item => item.attributename === attributeName);
+        if (existing) {
+          existing.atttributeVal = Array.isArray(value) ? value : [...existing.atttributeVal, value];
+        } else {
+          result.push({ attributename: attributeName, atttributeVal: Array.isArray(value) ? value : [value] });
         }
-      })
-    });
-  }
-
-  customizeFilter(filter: any): any {
-    if (!filter) return filter;
-
-    let modifiedFilters = [];
-    
-    filter.forEach((condition: any) => {
-      if (typeof condition === 'object' && !Array.isArray(condition)) {
-        Object.keys(condition).forEach(column => {
-          let values = condition[column].split(','); // Split values by comma
-          if (values.length > 1) {
-            modifiedFilters.push([column, 'in', values]); // Apply 'in' condition
-          } else {
-            modifiedFilters.push([column, '=', values[0]]); // Single value filter
+      }
+    } else if (Array.isArray(condition)) {
+      // Complex conditions with "and" or "or"
+      let logicalOperator = condition[1];
+      if (logicalOperator === "and" || logicalOperator === "or") {
+        condition.forEach(subCondition => {
+          if (Array.isArray(subCondition)) {
+            processFilter(subCondition);
           }
         });
-      } else {
-        modifiedFilters.push(condition);
       }
-    });
-
-    return modifiedFilters.length ? modifiedFilters : filter;
+    }
   }
+
+  processFilter(filter);
+  return result;
 }
